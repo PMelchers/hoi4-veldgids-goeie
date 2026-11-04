@@ -19,7 +19,7 @@ $auteurs     = get_users(
 		<ul class="filters__lijst">
 			<li><a class="chip" href="<?php echo esc_url( hoi4_alle_url() ); ?>"<?php echo is_home() ? ' aria-current="page"' : ''; ?>>Alles</a></li>
 			<?php foreach ( $categorieen as $categorie ) : ?>
-				<li><a class="chip" href="<?php echo esc_url( get_category_link( $categorie ) ); ?>"<?php echo is_category( $categorie->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $categorie->name ); ?> <span><?php echo esc_html( $categorie->count ); ?></span></a></li>
+				<li><a class="chip" href="<?php echo esc_url( get_category_link( $categorie ) ); ?>"<?php echo is_category( $categorie->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $categorie->name ); ?></a></li>
 			<?php endforeach; ?>
 		</ul>
 	</div>

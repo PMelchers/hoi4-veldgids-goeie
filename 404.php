@@ -1,9 +1,4 @@
 <?php
-/**
- * De pagina voor als er niets is gevonden. WordPress kiest dit bestand bij status 404.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

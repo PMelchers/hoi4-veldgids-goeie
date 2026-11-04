@@ -1,9 +1,4 @@
 <?php
-/**
- * Een gewone pagina, zoals Over deze site. WordPress kiest dit bestand voor elk bericht van het type page.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,7 +17,7 @@ get_header();
 				<div class="artikel__tekst">
 					<?php
 					the_content();
-					wp_link_pages(); // Alleen zichtbaar als de pagina is opgedeeld.
+					wp_link_pages();
 					?>
 				</div>
 			</article>

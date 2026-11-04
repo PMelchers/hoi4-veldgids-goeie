@@ -1,10 +1,4 @@
 <?php
-/**
- * Archieven: eenheden van een categorie, een tag of een datum.
- * WordPress zoekt eerst category.php of tag.php. Die zijn er niet, dus gebruikt het dit bestand.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

@@ -11,14 +11,12 @@ Text Domain: hoi4-veldgids
 Language: nl-NL
 */
 
-/* Drie kleuren. Het lettertype is het standaardlettertype van de browser. */
 :root {
   --achtergrond: #FFFFFF;
   --tekst: #1B1B1B;
   --accent: #6B5A1E;
 }
 
-/* ---------- Basis ---------- */
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--achtergrond); color: var(--tekst); line-height: 1.5; }
 h1, h2, h3, p, ul { margin: 0; }
@@ -26,13 +24,11 @@ ul { padding: 0; list-style: none; }
 a { color: var(--accent); }
 .icoon { width: 24px; height: 24px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; }
 
-/* Tekst die alleen een schermlezer hoort, en de link om het menu over te slaan */
 .alleen-schermlezer, .screen-reader-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .sla-over { position: absolute; top: -100px; left: 16px; }
 .sla-over:focus { top: 16px; }
 [hidden] { display: none !important; }
 
-/* ---------- Raster: 12 kolommen, op een telefoon 2 ---------- */
 .container { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
 .raster { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .kol-2 { grid-column: span 2; }
@@ -46,14 +42,12 @@ a { color: var(--accent); }
   .kol-2 { grid-column: span 1; }
 }
 
-/* ---------- Kop en menu ---------- */
 .kop { padding: 16px 0; }
 .logo { font-weight: bold; text-decoration: none; }
 .menu { margin-bottom: 48px; }
 .menu a { display: block; padding: 8px; text-align: center; text-decoration: none; border: 1px solid var(--accent); }
 .menu a[aria-current="page"] { font-weight: bold; }
 
-/* ---------- Knoppen en velden ---------- */
 .knop { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 16px; font: inherit; color: inherit; background: none; border: 1px solid var(--accent); cursor: pointer; }
 .knop--primair { color: var(--achtergrond); background: var(--accent); }
 .knop--tekst { border-color: transparent; text-decoration: underline; }
@@ -64,17 +58,16 @@ a { color: var(--accent); }
 .veld-invoer { width: 100%; padding: 16px; font: inherit; color: inherit; background: none; border: 1px solid var(--accent); }
 .veldfout { display: flex; gap: 8px; margin-top: 8px; font-weight: bold; }
 
-/* ---------- Voorpagina ---------- */
 .zoeken, .sectie { margin-bottom: 48px; }
 .zoeken h1, .sectie > h2 { margin-bottom: 16px; }
 .zoeken button { width: 100%; }
 
-/* Favorieten */
 .tegel { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; padding: 8px; font: inherit; text-align: center; text-decoration: none; color: inherit; background: none; border: 1px solid var(--accent); cursor: pointer; }
 .tegel__icoon { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--accent); }
 .tegel--toevoegen { border-style: dashed; }
+#favorieten li { position: relative; }
+.tegel-weg { position: absolute; top: 4px; right: 4px; width: 28px; height: 28px; padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
-/* Blokken met een lijst, die je kunt inklappen */
 .blok { align-self: start; border: 1px solid var(--accent); }
 .blok__knop { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px; font: inherit; font-weight: bold; color: inherit; background: none; border: 0; cursor: pointer; }
 .blok.is-ingeklapt .blok__knop .icoon { transform: rotate(180deg); }
@@ -83,12 +76,10 @@ a { color: var(--accent); }
 .lijst a, .lijst__leeg { display: block; padding: 16px; }
 .blok__strook { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; border-top: 1px solid var(--accent); }
 
-/* Tip onderaan */
 .uitgelicht { padding: 16px; border: 1px solid var(--accent); }
 .uitgelicht__kaart { display: block; margin-top: 8px; color: inherit; text-decoration: none; }
 .uitgelicht__kaart strong { display: block; }
 
-/* ---------- Overzichten, berichten en pagina's ---------- */
 .overzicht__kop { margin-bottom: 24px; }
 .filters { display: grid; gap: 16px; margin-bottom: 24px; padding: 16px; border: 1px solid var(--accent); }
 .filters__lijst, .pagination .nav-links { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -106,7 +97,6 @@ a { color: var(--accent); }
 .zoek404 { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
 .zoek404 .veld-invoer { flex: 1; width: auto; }
 
-/* ---------- Venster en meldingen ---------- */
 .dialoog { width: min(100% - 32px, 480px); padding: 24px; color: inherit; background: var(--achtergrond); border: 1px solid var(--accent); }
 .dialoog h2 { margin-bottom: 16px; }
 .dialoog__knoppen { display: flex; justify-content: flex-end; gap: 16px; margin-top: 24px; }

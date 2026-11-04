@@ -1,10 +1,4 @@
 <?php
-/**
- * Het venster waarmee de bezoeker een eenheid toevoegt aan Mijn divisies.
- * De keuzelijst bevat alle eenheden, gegroepeerd per categorie. app.js bewaart de keuze in de browser.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -13,9 +7,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 <dialog class="dialoog" id="dialoog" aria-labelledby="dialoog-titel">
 	<form id="favoriet-formulier" novalidate>
 		<h2 id="dialoog-titel">Nieuwe divisie</h2>
+
 		<div class="veld">
-			<label for="fav-eenheid">Welke eenheid wilt u toevoegen?</label>
-			<select class="veld-invoer" id="fav-eenheid" name="eenheid" aria-describedby="fav-fout">
+			<label for="fav-naam">Geef uw eigen divisie een naam</label>
+			<input class="veld-invoer" id="fav-naam" name="naam" type="text" maxlength="30" autocomplete="off">
+		</div>
+		<div class="veld">
+			<label for="fav-type">Soort divisie</label>
+			<select class="veld-invoer" id="fav-type" name="type">
+				<option value="">Kies een soort</option>
+				<?php foreach ( get_categories() as $categorie ) : ?>
+					<option value="<?php echo esc_url( get_category_link( $categorie ) ); ?>"><?php echo esc_html( $categorie->name ); ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+
+		<p>Of voeg een bestaande eenheid toe:</p>
+		<div class="veld">
+			<label for="fav-eenheid">Eenheid</label>
+			<select class="veld-invoer" id="fav-eenheid" name="eenheid">
 				<option value="">Kies een eenheid</option>
 				<?php foreach ( get_categories() as $categorie ) : ?>
 					<?php $eenheden = get_posts( array( 'category' => $categorie->term_id, 'numberposts' => -1, 'orderby' => 'title', 'order' => 'ASC' ) ); ?>
@@ -28,8 +38,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</select>
-			<p class="veldfout" id="fav-fout" hidden><svg class="icoon" aria-hidden="true"><use href="#i-info"/></svg><span></span></p>
 		</div>
+
+		<p class="veldfout" id="fav-fout" role="alert" hidden><svg class="icoon" aria-hidden="true"><use href="#i-info"/></svg><span></span></p>
+
 		<div class="dialoog__knoppen">
 			<button class="knop knop--tekst" type="button" id="annuleren">Annuleren</button>
 			<button class="knop knop--primair" type="submit">Toevoegen</button>

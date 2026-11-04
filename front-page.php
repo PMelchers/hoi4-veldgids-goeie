@@ -1,12 +1,4 @@
 <?php
-/**
- * De voorpagina van de veldgids. WordPress gebruikt dit bestand altijd voor de voorpagina.
- *
- * Alle blokken halen hun eenheden uit WordPress, uit de categorie die bij het blok hoort.
- * De favorieten komen uit het menu op de plek Divisies. De tip onderaan is een willekeurige eenheid.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -82,7 +74,6 @@ get_header();
 		</section>
 
 		<?php
-		// Een willekeurige eenheid als tip.
 		$tip = new WP_Query(
 			array(
 				'posts_per_page'      => 1,

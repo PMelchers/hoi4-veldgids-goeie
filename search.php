@@ -1,9 +1,4 @@
 <?php
-/**
- * De zoekresultaten. WordPress kiest dit bestand als er met het zoekveld is gezocht, dus met s in het adres.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

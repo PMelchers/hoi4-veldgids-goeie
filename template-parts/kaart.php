@@ -1,10 +1,4 @@
 <?php
-/**
- * Een kaart voor een eenheid in een overzicht: titel, meta, rol en fragment.
- * Wordt gebruikt in de loop van het berichtenoverzicht, de archieven en de zoekresultaten.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

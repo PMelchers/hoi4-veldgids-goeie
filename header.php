@@ -1,9 +1,4 @@
 <?php
-/**
- * Kop van elke pagina: iconen, kop en menu.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -19,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Iconenset: raster van 24 px, lijn van 2 px, nooit gevuld -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 	<symbol id="i-zoeken" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
 	<symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>

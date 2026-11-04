@@ -1,9 +1,4 @@
 <?php
-/**
- * Een enkele eenheid (bericht). WordPress kiest dit bestand voor elk bericht, dus voor type post.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -32,7 +27,6 @@ get_header();
 			</article>
 
 			<?php
-			// Links naar de vorige en de volgende eenheid.
 			the_post_navigation(
 				array(
 					'prev_text' => 'Vorige eenheid: %title',

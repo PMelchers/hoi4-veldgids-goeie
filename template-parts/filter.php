@@ -1,10 +1,4 @@
 <?php
-/**
- * De filters boven een overzicht: categorieën, tags en auteurs.
- * Elke keuze is een gewone link naar het archief van die categorie, tag of auteur.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

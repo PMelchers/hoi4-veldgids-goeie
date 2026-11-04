@@ -1,17 +1,9 @@
 <?php
-/**
- * Het overzicht met titel, filters, kaarten en paginering.
- * home.php, archive.php, author.php en search.php gebruiken allemaal dit bestand,
- * zodat het uiterlijk van alle overzichten hetzelfde is en de code maar op een plek staat.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// De titel hangt af van het soort overzicht.
 if ( is_search() ) {
 	$titel = 'Zoekresultaten voor ' . get_search_query();
 } elseif ( is_author() ) {

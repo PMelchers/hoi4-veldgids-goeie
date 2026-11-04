@@ -1,12 +1,4 @@
 <?php
-/**
- * Een blok van de voorpagina met de nieuwste eenheden uit een categorie.
- * De voorpagina roept dit bestand drie keer aan, met een andere categorie.
- *
- * Verwacht in $args: sleutel (voor de id's en de opslag), titel en categorie (de slug).
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,7 +8,6 @@ $sleutel   = isset( $args['sleutel'] ) ? $args['sleutel'] : 'blok';
 $titel     = isset( $args['titel'] ) ? $args['titel'] : '';
 $categorie = isset( $args['categorie'] ) ? $args['categorie'] : '';
 
-// De query haalt de nieuwste vier eenheden uit de categorie.
 $eenheden = new WP_Query(
 	array(
 		'category_name'       => $categorie,

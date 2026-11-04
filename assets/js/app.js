@@ -1,21 +1,18 @@
-/* Gedrag van het thema: zoeken, favorieten toevoegen en blokken inklappen. */
 (function () {
   'use strict';
 
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
-  // Opslag in de browser. Als dat niet kan, werkt alles nog steeds, alleen zonder onthouden.
   var opslag = {
     lees: function (sleutel, standaard) {
       try { var w = window.localStorage.getItem(sleutel); return w ? JSON.parse(w) : standaard; } catch (e) { return standaard; }
     },
     schrijf: function (sleutel, waarde) {
-      try { window.localStorage.setItem(sleutel, JSON.stringify(waarde)); } catch (e) { /* niet erg */ }
+      try { window.localStorage.setItem(sleutel, JSON.stringify(waarde)); } catch (e) {}
     }
   };
 
-  /* ---------- Meldingen met ongedaan maken ---------- */
   var meldingen = $('#meldingen');
   function toonMelding(tekst, ongedaan) {
     if (!meldingen) return;
@@ -35,7 +32,6 @@
     timer = setTimeout(sluit, 7000);
   }
 
-  /* ---------- Zoeken: foutmelding bij een leeg veld en een laadstate ---------- */
   var formulier = $('#zoekformulier');
   var veld = $('#zoekveld');
   var fout = $('#zoek-fout');
@@ -57,13 +53,11 @@
       }
       fout.hidden = true;
       veld.removeAttribute('aria-invalid');
-      // Het formulier wordt gewoon verstuurd. Tot de nieuwe pagina er is, laat de knop zien dat er gezocht wordt.
       zoekknop.classList.add('is-laden');
       zoekknop.setAttribute('aria-busy', 'true');
       $('span', zoekknop).textContent = 'Bezig';
     });
 
-    // Terug met de knop Vorige van de browser: de laadstate mag niet blijven staan.
     window.addEventListener('pageshow', function () {
       zoekknop.classList.remove('is-laden');
       zoekknop.removeAttribute('aria-busy');
@@ -71,22 +65,28 @@
     });
   }
 
-  /* ---------- Favorieten: een eenheid toevoegen aan Mijn divisies ---------- */
   var lijst = $('#favorieten');
   var toevoegItem = $('#toevoegen-item');
   var toevoegKnop = $('#toevoegen');
   var dialoog = $('#dialoog');
   var favFormulier = $('#favoriet-formulier');
+  var favNaam = $('#fav-naam');
+  var favType = $('#fav-type');
   var favEenheid = $('#fav-eenheid');
   var favFout = $('#fav-fout');
   var annuleer = $('#annuleren');
 
-  if (lijst && toevoegItem && toevoegKnop && dialoog && favFormulier && favEenheid && favFout && annuleer) {
+  if (lijst && toevoegItem && toevoegKnop && dialoog && favFormulier && favNaam && favType && favEenheid && favFout && annuleer) {
     var favorieten = opslag.lees('sp-favorieten', []);
 
-    // Staat deze eenheid al als tegel in de lijst, bijvoorbeeld via het menu?
-    var staatErAl = function (url) {
-      return $$('.tegel', lijst).some(function (a) { return a.href === url; });
+    var tegelNamen = function () {
+      return $$('.tegel', lijst).map(function (a) { return a.lastChild.textContent.trim().toLowerCase(); });
+    };
+
+    var verwijder = function (fav, li) {
+      favorieten = favorieten.filter(function (f) { return f !== fav; });
+      opslag.schrijf('sp-favorieten', favorieten);
+      if (li.parentNode) li.parentNode.removeChild(li);
     };
 
     var maakTegel = function (fav) {
@@ -101,63 +101,80 @@
       icoon.textContent = fav.naam.charAt(0).toUpperCase();
       a.appendChild(icoon);
       a.appendChild(document.createTextNode(fav.naam));
+      var weg = document.createElement('button');
+      weg.type = 'button';
+      weg.className = 'tegel-weg';
+      weg.setAttribute('aria-label', fav.naam + ' verwijderen');
+      weg.textContent = '×';
+      weg.addEventListener('click', function () { verwijder(fav, li); });
       li.appendChild(a);
+      li.appendChild(weg);
       return li;
     };
 
-    var toonFout = function (tekst) {
+    var toonFout = function (tekst, veld) {
       $('span', favFout).textContent = tekst;
       favFout.hidden = false;
-      favEenheid.setAttribute('aria-invalid', 'true');
-      favEenheid.focus();
+      veld.setAttribute('aria-invalid', 'true');
+      veld.focus();
+    };
+
+    var wisFout = function () {
+      favFout.hidden = true;
+      [favNaam, favType, favEenheid].forEach(function (v) { v.removeAttribute('aria-invalid'); });
     };
 
     favorieten.forEach(function (f) {
-      if (!staatErAl(f.url)) lijst.insertBefore(maakTegel(f), toevoegItem);
+      if (tegelNamen().indexOf(f.naam.toLowerCase()) === -1) lijst.insertBefore(maakTegel(f), toevoegItem);
     });
 
-    favEenheid.addEventListener('change', function () {
-      favFout.hidden = true;
-      favEenheid.removeAttribute('aria-invalid');
+    [favNaam, favType, favEenheid].forEach(function (v) {
+      v.addEventListener('input', wisFout);
+      v.addEventListener('change', wisFout);
     });
 
     toevoegKnop.addEventListener('click', function () {
       favFormulier.reset();
-      favFout.hidden = true;
-      favEenheid.removeAttribute('aria-invalid');
+      wisFout();
       dialoog.showModal();
-      favEenheid.focus();
+      favNaam.focus();
     });
     annuleer.addEventListener('click', function () { dialoog.close(); toevoegKnop.focus(); });
 
     favFormulier.addEventListener('submit', function (e) {
       e.preventDefault();
-      var url = favEenheid.value;
-      if (!url) { toonFout('Kies eerst een eenheid, commandant.'); return; }
-      if (staatErAl(url)) { toonFout('Deze eenheid staat al bij uw divisies.'); return; }
+      var naam = favNaam.value.trim();
+      var fav;
 
-      var naam = favEenheid.options[favEenheid.selectedIndex].text;
-      var fav = { naam: naam, url: url };
+      if (naam) {
+        if (!favType.value) { toonFout('Kies ook een soort divisie, commandant.', favType); return; }
+        fav = { naam: naam, url: favType.value };
+      } else if (favEenheid.value) {
+        fav = { naam: favEenheid.options[favEenheid.selectedIndex].text, url: favEenheid.value };
+      } else {
+        toonFout('Geef uw divisie een naam of kies een eenheid.', favNaam);
+        return;
+      }
+
+      if (tegelNamen().indexOf(fav.naam.toLowerCase()) !== -1) {
+        toonFout('Deze divisie staat al op uw pagina.', naam ? favNaam : favEenheid);
+        return;
+      }
+
       favorieten.push(fav);
       opslag.schrijf('sp-favorieten', favorieten);
       var tegel = maakTegel(fav);
       lijst.insertBefore(tegel, toevoegItem);
       dialoog.close();
-      toonMelding(naam + ' is toegevoegd aan uw divisies.', function () {
-        favorieten = favorieten.filter(function (f) { return f.url !== fav.url; });
-        opslag.schrijf('sp-favorieten', favorieten);
-        if (tegel.parentNode) tegel.parentNode.removeChild(tegel);
-      });
+      toonMelding(fav.naam + ' is toegevoegd aan uw divisies.', function () { verwijder(fav, tegel); });
     });
   }
-  /* ---------- Blokken: soepel inklappen met een strook om ze terug te halen ---------- */
   var ingeklapt = opslag.lees('sp-ingeklapt', {});
   function zetBlok(blok, dicht, bewaar) {
     var knopBlok = $('.blok__knop', blok);
     blok.classList.toggle('is-ingeklapt', dicht);
     knopBlok.setAttribute('aria-expanded', String(!dicht));
     $('.blok__strook', blok).hidden = !dicht;
-    // Verborgen inhoud mag niet meer met het toetsenbord bereikbaar zijn.
     $('.blok__binnen', blok).inert = dicht;
     if (bewaar) { ingeklapt[blok.dataset.blok] = dicht; opslag.schrijf('sp-ingeklapt', ingeklapt); }
   }

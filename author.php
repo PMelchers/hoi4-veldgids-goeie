@@ -1,9 +1,4 @@
 <?php
-/**
- * Alle eenheden van een auteur. WordPress kiest dit bestand voor het archief van een auteur.
- *
- * @package hoi4-veldgids
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

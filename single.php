@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 get_header();
 ?>
 
@@ -25,15 +21,6 @@ get_header();
 
 				<?php the_tags( '<p>Tags: ', ', ', '</p>' ); ?>
 			</article>
-
-			<?php
-			the_post_navigation(
-				array(
-					'prev_text' => 'Vorige eenheid: %title',
-					'next_text' => 'Volgende eenheid: %title',
-				)
-			);
-			?>
 		<?php endwhile; ?>
 	</main>
 

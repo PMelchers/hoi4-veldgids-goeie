@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 function hoi4_menu_klasse( $classes, $item, $args ) {
 	if ( isset( $args->theme_location ) && in_array( $args->theme_location, array( 'hoofdmenu', 'divisies' ), true ) ) {
 		$classes[] = 'kol-2';

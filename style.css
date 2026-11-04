@@ -84,7 +84,5 @@ a { color: var(--accent); }
 .artikel__tekst { margin: 16px 0; }
 .artikel__tekst > * + * { margin-top: 16px; }
 .artikel__tekst img { max-width: 100%; height: auto; }
-.post-navigation { margin-top: 24px; }
-.post-navigation .nav-links { display: flex; justify-content: space-between; gap: 16px; }
 .zoek404 { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
 .zoek404 .veld-invoer { flex: 1; width: auto; }

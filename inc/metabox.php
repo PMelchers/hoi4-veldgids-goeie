@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 function hoi4_registreer_rol_veld() {
 	register_post_meta(
 		'post',

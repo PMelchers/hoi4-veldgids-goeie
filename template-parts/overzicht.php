@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 if ( is_search() ) {
 	$titel = 'Zoekresultaten voor ' . get_search_query();
 } elseif ( is_author() ) {

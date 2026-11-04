@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 $titel     = isset( $args['titel'] ) ? $args['titel'] : '';
 $categorie = isset( $args['categorie'] ) ? $args['categorie'] : '';
 

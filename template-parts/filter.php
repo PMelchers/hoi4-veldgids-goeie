@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 $categorieen = get_categories( array( 'hide_empty' => true ) );
 $tags        = get_tags( array( 'hide_empty' => true ) );
 $auteurs     = get_users(

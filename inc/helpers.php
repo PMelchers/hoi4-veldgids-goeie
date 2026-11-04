@@ -1,9 +1,5 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 function hoi4_alle_url() {
 	$pagina = (int) get_option( 'page_for_posts' );
 	return $pagina ? get_permalink( $pagina ) : home_url( '/' );

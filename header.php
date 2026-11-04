@@ -17,10 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 	<symbol id="i-zoeken" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
 	<symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
-	<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-	<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
-	<symbol id="i-vinkje" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
-	<symbol id="i-oog" viewBox="0 0 24 24"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/></symbol>
 </svg>
 
 <a class="sla-over" href="#inhoud">Naar de inhoud</a>

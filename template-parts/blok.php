@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$sleutel   = isset( $args['sleutel'] ) ? $args['sleutel'] : 'blok';
 $titel     = isset( $args['titel'] ) ? $args['titel'] : '';
 $categorie = isset( $args['categorie'] ) ? $args['categorie'] : '';
 
@@ -13,14 +12,14 @@ $eenheden = new WP_Query(
 		'category_name'       => $categorie,
 		'posts_per_page'      => 4,
 		'ignore_sticky_posts' => true,
-		'no_found_rows'       => true, // We tellen geen pagina's, dus dat scheelt een databasevraag.
+		'no_found_rows'       => true,
 	)
 );
-$term      = get_category_by_slug( $categorie );
+$term     = get_category_by_slug( $categorie );
 ?>
-<article class="blok kol-4" data-blok="<?php echo esc_attr( $sleutel ); ?>">
-	<h3><button class="blok__knop" type="button" aria-expanded="true" aria-controls="inhoud-<?php echo esc_attr( $sleutel ); ?>"><span><?php echo esc_html( $titel ); ?></span><svg class="icoon" aria-hidden="true"><use href="#i-chevron"/></svg></button></h3>
-	<div class="blok__inhoud" id="inhoud-<?php echo esc_attr( $sleutel ); ?>"><div class="blok__binnen"><ul class="lijst">
+<details class="blok kol-4" open>
+	<summary><h3><?php echo esc_html( $titel ); ?></h3><svg class="icoon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+	<ul class="lijst">
 		<?php if ( $eenheden->have_posts() ) : ?>
 			<?php
 			while ( $eenheden->have_posts() ) :
@@ -35,6 +34,5 @@ $term      = get_category_by_slug( $categorie );
 		<?php if ( $term && ! is_wp_error( $term ) ) : ?>
 			<li><a href="<?php echo esc_url( get_category_link( $term ) ); ?>">Alle eenheden</a></li>
 		<?php endif; ?>
-	</ul></div></div>
-	<div class="blok__strook" hidden><svg class="icoon" aria-hidden="true"><use href="#i-oog"/></svg><span><?php echo esc_html( $titel ); ?> is verborgen.</span><button class="knop knop--tekst" type="button" data-toon>Weer tonen</button></div>
-</article>
+	</ul>
+</details>

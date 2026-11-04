@@ -40,31 +40,20 @@ function hoi4_divisies_standaard() {
 		'Tanks'   => home_url( '/category/tanks/' ),
 		'Troepen' => home_url( '/category/troepen/' ),
 	);
-	echo '<ul class="raster" id="favorieten">';
+	echo '<ul class="raster">';
 	foreach ( $standaard as $naam => $url ) {
-		hoi4_tegel( $naam, $url );
+		echo hoi4_tegel( $naam, $url );
 	}
-	echo hoi4_toevoeg_tegel();
 	echo '</ul>';
 }
 
 class Hoi4_Divisie_Walker extends Walker_Nav_Menu {
 
 	public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-		ob_start();
-		hoi4_tegel( $item->title, $item->url );
-		$output .= ob_get_clean();
+		$output .= hoi4_tegel( $item->title, $item->url );
 	}
 
 	public function end_el( &$output, $item, $depth = 0, $args = null ) {
 		$output .= '';
 	}
 }
-
-function hoi4_voeg_toevoegtegel_toe( $items, $args ) {
-	if ( isset( $args->theme_location ) && 'divisies' === $args->theme_location ) {
-		$items .= hoi4_toevoeg_tegel();
-	}
-	return $items;
-}
-add_filter( 'wp_nav_menu_items', 'hoi4_voeg_toevoegtegel_toe', 10, 2 );

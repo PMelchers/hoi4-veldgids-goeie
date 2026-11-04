@@ -27,7 +27,6 @@ a { color: var(--accent); }
 .alleen-schermlezer, .screen-reader-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .sla-over { position: absolute; top: -100px; left: 16px; }
 .sla-over:focus { top: 16px; }
-[hidden] { display: none !important; }
 
 .container { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
 .raster { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
@@ -50,31 +49,24 @@ a { color: var(--accent); }
 
 .knop { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 16px; font: inherit; color: inherit; background: none; border: 1px solid var(--accent); cursor: pointer; }
 .knop--primair { color: var(--achtergrond); background: var(--accent); }
-.knop--tekst { border-color: transparent; text-decoration: underline; }
-.knop.is-laden { opacity: .6; }
 
 .veld { margin-bottom: 16px; }
 .veld label { display: block; margin-bottom: 8px; }
 .veld-invoer { width: 100%; padding: 16px; font: inherit; color: inherit; background: none; border: 1px solid var(--accent); }
-.veldfout { display: flex; gap: 8px; margin-top: 8px; font-weight: bold; }
 
 .zoeken, .sectie { margin-bottom: 48px; }
 .zoeken h1, .sectie > h2 { margin-bottom: 16px; }
 .zoeken button { width: 100%; }
 
-.tegel { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; padding: 8px; font: inherit; text-align: center; text-decoration: none; color: inherit; background: none; border: 1px solid var(--accent); cursor: pointer; }
+.tegel { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; padding: 8px; text-align: center; text-decoration: none; color: inherit; border: 1px solid var(--accent); }
 .tegel__icoon { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--accent); }
-.tegel--toevoegen { border-style: dashed; }
-#favorieten li { position: relative; }
-.tegel-weg { position: absolute; top: 4px; right: 4px; width: 28px; height: 28px; padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
 .blok { align-self: start; border: 1px solid var(--accent); }
-.blok__knop { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px; font: inherit; font-weight: bold; color: inherit; background: none; border: 0; cursor: pointer; }
-.blok.is-ingeklapt .blok__knop .icoon { transform: rotate(180deg); }
-.blok.is-ingeklapt .blok__inhoud { display: none; }
+.blok summary { display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer; list-style: none; }
+.blok summary::-webkit-details-marker { display: none; }
+.blok:not([open]) .icoon { transform: rotate(180deg); }
 .lijst li { border-top: 1px solid var(--accent); }
 .lijst a, .lijst__leeg { display: block; padding: 16px; }
-.blok__strook { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; border-top: 1px solid var(--accent); }
 
 .uitgelicht { padding: 16px; border: 1px solid var(--accent); }
 .uitgelicht__kaart { display: block; margin-top: 8px; color: inherit; text-decoration: none; }
@@ -96,11 +88,3 @@ a { color: var(--accent); }
 .post-navigation .nav-links { display: flex; justify-content: space-between; gap: 16px; }
 .zoek404 { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
 .zoek404 .veld-invoer { flex: 1; width: auto; }
-
-.dialoog { width: min(100% - 32px, 480px); padding: 24px; color: inherit; background: var(--achtergrond); border: 1px solid var(--accent); }
-.dialoog h2 { margin-bottom: 16px; }
-.dialoog__knoppen { display: flex; justify-content: flex-end; gap: 16px; margin-top: 24px; }
-.meldingen { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); width: min(100% - 32px, 440px); }
-.toast { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--achtergrond); border: 1px solid var(--accent); }
-.toast .knop { margin-left: auto; }
-

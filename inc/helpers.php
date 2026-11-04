@@ -28,14 +28,10 @@ function hoi4_rol() {
 }
 
 function hoi4_tegel( $naam, $url ) {
-	printf(
+	return sprintf(
 		'<li class="kol-2"><a class="tegel" href="%1$s"><span class="tegel__icoon" aria-hidden="true">%2$s</span>%3$s</a></li>',
 		esc_url( $url ),
 		esc_html( mb_substr( $naam, 0, 1 ) ),
 		esc_html( $naam )
 	);
-}
-
-function hoi4_toevoeg_tegel() {
-	return '<li class="kol-2" id="toevoegen-item"><button class="tegel tegel--toevoegen" type="button" id="toevoegen"><span class="tegel__icoon" aria-hidden="true"><svg class="icoon"><use href="#i-plus"/></svg></span>Nieuwe divisie</button></li>';
 }

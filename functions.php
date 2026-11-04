@@ -22,9 +22,7 @@ function hoi4_setup() {
 add_action( 'after_setup_theme', 'hoi4_setup' );
 
 function hoi4_assets() {
-	$versie = wp_get_theme()->get( 'Version' );
-	wp_enqueue_style( 'hoi4-stijl', get_stylesheet_uri(), array(), $versie );
-	wp_enqueue_script( 'hoi4-app', get_theme_file_uri( 'assets/js/app.js' ), array(), $versie, true );
+	wp_enqueue_style( 'hoi4-stijl', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 }
 add_action( 'wp_enqueue_scripts', 'hoi4_assets' );
 
